@@ -10,21 +10,14 @@ function updateVisitStreak(){
   const last=localStorage.getItem('aliceLastVisit');
   let streak=Number(localStorage.getItem('aliceVisitStreak')||0);
   if(!last){streak=1}
-  else if(last!==todayKey){
-    const gap=Math.round((keyToUtc(todayKey)-keyToUtc(last))/DAY_MS);
-    streak=gap===1?streak+1:1;
-  }
-  localStorage.setItem('aliceLastVisit',todayKey);
-  localStorage.setItem('aliceVisitStreak',String(streak));
-  return streak;
+  else if(last!==todayKey){const gap=Math.round((keyToUtc(todayKey)-keyToUtc(last))/DAY_MS);streak=gap===1?streak+1:1}
+  localStorage.setItem('aliceLastVisit',todayKey);localStorage.setItem('aliceVisitStreak',String(streak));return streak;
 }
 const visitStreak=updateVisitStreak();
-
 function getSeen(){try{return new Set(JSON.parse(localStorage.getItem('aliceSeenExhibits')||'[]'))}catch(e){return new Set()}}
 function saveSeen(set){localStorage.setItem('aliceSeenExhibits',JSON.stringify([...set]))}
 function updateReturnUI(){
-  const seen=getSeen();
-  seen.add(exhibits[current].no);saveSeen(seen);
+  const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
   const daily=exhibits[dailyIndex][lang];
   document.getElementById('dailyLabel').textContent=lang==='ja'?'今日の展示':"TODAY'S EXHIBIT";
   document.getElementById('dailyName').textContent=daily.title;
@@ -32,11 +25,12 @@ function updateReturnUI(){
   document.getElementById('streakStat').textContent=`🔥 ${visitStreak}`;
   document.getElementById('collectionTitle').textContent=lang==='ja'?'コレクション':'COLLECTION';
   document.getElementById('collectionCopy').textContent=seen.size===exhibits.length
-    ? (lang==='ja'?'全展示コンプリート。未来人より2026年に詳しい。':'Collection complete. You now understand 2026 better than the future historians.')
-    : (lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
+    ?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.')
+    :(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
+  fixScoreLabel();
 }
-
+function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
 const originalRenderExhibit=renderExhibit;
 renderExhibit=function(){originalRenderExhibit();updateReturnUI()};
-current=dailyIndex;
-renderExhibit();
+document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{fixScoreLabel();updateReturnUI()},0));
+current=dailyIndex;renderExhibit();
