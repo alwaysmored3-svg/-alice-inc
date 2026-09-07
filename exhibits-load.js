@@ -1,0 +1,1 @@
+if(!window.ALICE_EXHIBITS||window.ALICE_EXHIBITS.length!==100){console.warn('ALICE INC. exhibit pack expected 100 items, got',window.ALICE_EXHIBITS?.length||0);}else{exhibits.splice(0,exhibits.length,...window.ALICE_EXHIBITS);}
