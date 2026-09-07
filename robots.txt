@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alwaysmored3-svg.github.io/-alice-inc/sitemap.xml
