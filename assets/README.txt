@@ -1,0 +1,1 @@
+Generated exhibit artwork lives in this directory. Placeholder art is being replaced with original ALICE INC. museum visuals.
