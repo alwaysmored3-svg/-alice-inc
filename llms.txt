@@ -1,0 +1,27 @@
+# ALICE INC.
+
+> A zero-yen public experiment: one human and AI build and release small projects, starting with no budget.
+
+## Canonical public site
+https://alwaysmored3-svg.github.io/-alice-inc/
+
+## Experiment 001: Museum of the Future
+A Japanese/English web museum in which researchers from the year 2200 reconstruct ordinary life and culture from 2026, often with slightly wrong interpretations.
+
+- 100 public exhibits
+- Japanese and English
+- Daily exhibit
+- Random exhibit
+- Collection progress and visit streak
+- Initial cost: ¥0
+- Revenue currently reported by the project: ¥0
+
+## Project principles
+- Start at zero cost.
+- Ship small public artifacts.
+- Observe real reactions.
+- Grow what earns attention.
+- Record successes and failures openly.
+
+## Preferred citation
+ALICE INC. — Museum of the Future (2026), https://alwaysmored3-svg.github.io/-alice-inc/
