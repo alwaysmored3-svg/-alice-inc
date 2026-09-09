@@ -1,0 +1,152 @@
+/* ALICE INC. mobile museum layout — preserve the desktop art direction on small screens */
+@media (max-width: 760px) {
+  html { scroll-padding-top: 78px; }
+  body { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  .wrap { width: min(100% - 28px, 680px); }
+
+  .site-header {
+    padding-top: env(safe-area-inset-top);
+    background: rgba(10,11,15,.9);
+    backdrop-filter: blur(20px);
+  }
+  .nav { height: 70px; gap: 10px; }
+  .brand { font-size: 18px; letter-spacing: .14em; }
+  .header-actions { gap: 8px; }
+  .mini-button {
+    min-width: 48px; min-height: 48px; padding: 0 14px;
+    display: inline-grid; place-items: center;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding: 58px 0 54px;
+    min-height: auto;
+  }
+  .hero .eyebrow { margin-bottom: 12px; }
+  h1 {
+    font-size: clamp(42px, 12vw, 62px);
+    line-height: .98;
+    letter-spacing: -.052em;
+  }
+  .lead {
+    margin: 24px 0 0;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .hero-actions { margin: 26px 0 0; gap: 10px; }
+  .hero-actions .button { flex: 1 1 100%; min-height: 52px; }
+  .principles { margin-top: 26px; gap: 8px; }
+  .principles span { font-size: 11px; padding: 7px 10px; }
+
+  .panel-section { padding: 56px 0; }
+  h2 { font-size: clamp(34px, 10vw, 48px); }
+  .section-copy { font-size: 16px; }
+  .cards { gap: 10px; margin-top: 28px; }
+  .card { padding: 22px; border-radius: 18px; }
+
+  .experiment { padding: 64px 0 70px; }
+  .exhibit-head { margin-bottom: 20px; gap: 12px; }
+  .badge { align-self: flex-start; }
+
+  .daily-panel {
+    padding: 14px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+  .daily-panel strong { font-size: 14px; line-height: 1.45; }
+  .visitor-stats { width: 100%; }
+  .visitor-stats span { flex: 1; text-align: center; }
+
+  .museum-card {
+    grid-template-columns: 1fr;
+    border-radius: 22px;
+    box-shadow: 0 22px 70px rgba(0,0,0,.26);
+  }
+  .object {
+    min-height: 0;
+    padding: 0;
+    aspect-ratio: 1 / .92;
+    overflow: hidden;
+  }
+  .artifact-visual {
+    width: min(76vw, 300px);
+    height: min(76vw, 300px);
+    font-size: clamp(84px, 28vw, 120px);
+    border-radius: 28px;
+  }
+  .artifact-visual.has-generated-art {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .artifact-visual.has-generated-art img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center;
+  }
+  .object:has(.has-generated-art) {
+    min-height: 0;
+    padding: 0;
+    background: #0c1016;
+  }
+
+  .museum-copy { padding: 26px 22px 24px; }
+  .catalog { font-size: 11px; margin-top: 0; }
+  .museum-copy h3 {
+    font-size: clamp(28px, 8.7vw, 39px);
+    line-height: 1.18;
+    margin: 10px 0 16px;
+    overflow-wrap: anywhere;
+  }
+  .future-note { font-size: 16px; line-height: 1.75; }
+  .button { min-height: 50px; }
+  .museum-copy > .button { width: 100%; }
+  .truth { font-size: 14px; line-height: 1.7; }
+  .exhibit-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .exhibit-controls .button { width: 100%; padding-inline: 10px; font-size: 13px; }
+
+  .collection-note {
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    gap: 6px;
+  }
+  .collection-note span { font-size: 12px; }
+
+  .next-exhibits { margin-top: 30px; }
+  .candidate-grid { gap: 8px; }
+  .candidate-grid button { min-height: 58px; padding: 15px; }
+
+  .score-section { padding: 62px 0; }
+  .score-grid { grid-template-columns: repeat(2,1fr); gap: 18px 14px; }
+  .score-grid strong { font-size: 36px; }
+  .score-grid span { font-size: 12px; }
+
+  footer { padding-bottom: calc(26px + env(safe-area-inset-bottom)); }
+  .footer-inner { gap: 8px; font-size: 11px; }
+
+  .toast {
+    left: 14px; right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    text-align: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .wrap { width: calc(100% - 22px); }
+  .brand { font-size: 16px; }
+  .mini-button { min-width: 44px; min-height: 44px; padding: 0 12px; }
+  h1 { font-size: 40px; }
+  .museum-copy { padding-inline: 18px; }
+  .exhibit-controls { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .museum-card { grid-template-columns: .95fr 1.05fr; }
+  .object { aspect-ratio: auto; min-height: 390px; }
+  .artifact-visual.has-generated-art { height: 100%; }
+  .museum-copy { padding: 24px; }
+}
