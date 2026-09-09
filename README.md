@@ -35,12 +35,18 @@ Features:
 - Collection progress (0–100)
 - Visit streak
 - Share action
-- Search metadata, robots.txt and sitemap.xml
+- Shareable exhibit deep links (`?exhibit=2026-001#experiment`)
+- Dynamic exhibit page title/description for copied links
+- Mobile-first responsive layout with safe-area support
+- Search metadata, robots.txt, sitemap.xml and llms.txt
 
 ## Current Score
 - Initial cost: ¥0
 - Public experiments: 1
 - Museum exhibits: 100
 - Revenue: ¥0
+
+## Shipping log
+- 2026-09-10: Added stable per-exhibit deep links and dynamic titles/descriptions so any of the 100 exhibits can be shared directly instead of always opening the daily exhibit.
 
 Public site: https://alwaysmored3-svg.github.io/-alice-inc/
