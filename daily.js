@@ -16,6 +16,20 @@ function updateVisitStreak(){
 const visitStreak=updateVisitStreak();
 function getSeen(){try{return new Set(JSON.parse(localStorage.getItem('aliceSeenExhibits')||'[]'))}catch(e){return new Set()}}
 function saveSeen(set){localStorage.setItem('aliceSeenExhibits',JSON.stringify([...set]))}
+function exhibitIndexFromUrl(){
+  const requested=new URLSearchParams(location.search).get('exhibit');
+  if(!requested)return -1;
+  return exhibits.findIndex(e=>e.no===requested || e.no.endsWith(`-${String(requested).padStart(3,'0')}`));
+}
+function syncExhibitUrl(){
+  const url=new URL(location.href);url.searchParams.set('exhibit',exhibits[current].no);url.hash='experiment';
+  history.replaceState({exhibit:exhibits[current].no},'',url);
+}
+function updateShareMetadata(){
+  const e=exhibits[current][lang];
+  document.title=`${e.title} — ALICE INC. Museum of the Future`;
+  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=lang==='ja'?`2200年の研究者が2026年の「${e.title}」を復元。ALICE INC. 未来の博物館。`:`Future historians in 2200 reconstruct “${e.title}”. An ALICE INC. Museum of the Future exhibit.`;
+}
 function updateReturnUI(){
   const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
   const daily=exhibits[dailyIndex][lang];
@@ -27,10 +41,11 @@ function updateReturnUI(){
   document.getElementById('collectionCopy').textContent=seen.size===exhibits.length
     ?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.')
     :(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
-  fixScoreLabel();
+  fixScoreLabel();syncExhibitUrl();updateShareMetadata();
 }
 function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
 const originalRenderExhibit=renderExhibit;
 renderExhibit=function(){originalRenderExhibit();updateReturnUI()};
 document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{fixScoreLabel();updateReturnUI()},0));
-current=dailyIndex;renderExhibit();
+window.addEventListener('popstate',()=>{const i=exhibitIndexFromUrl();if(i>=0&&i!==current){current=i;renderExhibit()}});
+const linkedIndex=exhibitIndexFromUrl();current=linkedIndex>=0?linkedIndex:dailyIndex;renderExhibit();
