@@ -16,6 +16,9 @@ function updateVisitStreak(){
 const visitStreak=updateVisitStreak();
 function getSeen(){try{return new Set(JSON.parse(localStorage.getItem('aliceSeenExhibits')||'[]'))}catch(e){return new Set()}}
 function saveSeen(set){localStorage.setItem('aliceSeenExhibits',JSON.stringify([...set]))}
+function bumpLocalMetric(name){const key=`aliceMetric:${name}`;const value=Number(localStorage.getItem(key)||0)+1;localStorage.setItem(key,String(value));return value}
+function recordSession(){if(sessionStorage.getItem('aliceSessionRecorded'))return;sessionStorage.setItem('aliceSessionRecorded','1');bumpLocalMetric('sessions')}
+recordSession();
 function exhibitIndexFromUrl(){
   const requested=new URLSearchParams(location.search).get('exhibit');
   if(!requested)return -1;
@@ -28,7 +31,11 @@ function syncExhibitUrl(){
 function updateShareMetadata(){
   const e=exhibits[current][lang];
   document.title=`${e.title} — ALICE INC. Museum of the Future`;
-  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=lang==='ja'?`2200年の研究者が2026年の「${e.title}」を復元。ALICE INC. 未来の博物館。`:`Future historians in 2200 reconstruct “${e.title}”. An ALICE INC. Museum of the Future exhibit.`;
+  const text=lang==='ja'?`2200年の研究者が2026年の「${e.title}」を復元。ALICE INC. 未来の博物館。`:`Future historians in 2200 reconstruct “${e.title}”. An ALICE INC. Museum of the Future exhibit.`;
+  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=text;
+  const ogTitle=document.querySelector('meta[property="og:title"]');if(ogTitle)ogTitle.content=document.title;
+  const ogDesc=document.querySelector('meta[property="og:description"]');if(ogDesc)ogDesc.content=text;
+  const ogUrl=document.querySelector('meta[property="og:url"]');if(ogUrl)ogUrl.content=location.href;
 }
 function updateReturnUI(){
   const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
@@ -46,6 +53,10 @@ function updateReturnUI(){
 function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
 const originalRenderExhibit=renderExhibit;
 renderExhibit=function(){originalRenderExhibit();updateReturnUI()};
-document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{fixScoreLabel();updateReturnUI()},0));
+document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{bumpLocalMetric('language-switches');fixScoreLabel();updateReturnUI()},0));
+document.getElementById('toggleTruth').addEventListener('click',()=>{if(!document.getElementById('truth').hidden)bumpLocalMetric('corrections-opened')});
+document.getElementById('nextExhibit').addEventListener('click',()=>bumpLocalMetric('next-clicks'));
+document.getElementById('randomExhibit').addEventListener('click',()=>bumpLocalMetric('random-clicks'));
+document.getElementById('shareButton').addEventListener('click',()=>bumpLocalMetric('share-attempts'));
 window.addEventListener('popstate',()=>{const i=exhibitIndexFromUrl();if(i>=0&&i!==current){current=i;renderExhibit()}});
 const linkedIndex=exhibitIndexFromUrl();current=linkedIndex>=0?linkedIndex:dailyIndex;renderExhibit();
