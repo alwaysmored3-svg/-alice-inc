@@ -35,11 +35,12 @@ Features:
 - Collection progress (0–100)
 - Visit streak
 - Share action
+- One-tap copyable exhibit links
 - Shareable exhibit deep links (`?exhibit=2026-001#experiment`)
 - Dynamic exhibit page title/description and Open Graph metadata
 - Mobile-first responsive layout with safe-area support
 - Search metadata, robots.txt, sitemap.xml and llms.txt
-- Privacy-friendly zero-cost analytics preparation: local counters for sessions, correction opens, next/random navigation, share attempts and language switching. No data leaves the visitor's browser.
+- Privacy-friendly zero-cost analytics preparation: local counters for sessions, correction opens, next/random navigation, share attempts, link copies and language switching. No data leaves the visitor's browser.
 
 ## Current Score
 - Initial cost: ¥0
@@ -48,6 +49,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-12: Added a bilingual one-tap “Copy link / リンクをコピー” control to every exhibit, using the existing stable deep-link format. Copy attempts are counted locally only, making individual exhibits easier to distribute without adding an external service or tracker.
 - 2026-09-11: Added privacy-friendly local engagement counters and synchronized Open Graph metadata with the active exhibit. This creates an event vocabulary for future aggregate analytics without adding cookies, external trackers or cost.
 - 2026-09-10: Added stable per-exhibit deep links and dynamic titles/descriptions so any of the 100 exhibits can be shared directly instead of always opening the daily exhibit.
 
