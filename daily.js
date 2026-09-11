@@ -24,10 +24,8 @@ function exhibitIndexFromUrl(){
   if(!requested)return -1;
   return exhibits.findIndex(e=>e.no===requested || e.no.endsWith(`-${String(requested).padStart(3,'0')}`));
 }
-function syncExhibitUrl(){
-  const url=new URL(location.href);url.searchParams.set('exhibit',exhibits[current].no);url.hash='experiment';
-  history.replaceState({exhibit:exhibits[current].no},'',url);
-}
+function exhibitUrl(){const url=new URL(location.href);url.searchParams.set('exhibit',exhibits[current].no);url.hash='experiment';return url.toString()}
+function syncExhibitUrl(){history.replaceState({exhibit:exhibits[current].no},'',exhibitUrl())}
 function updateShareMetadata(){
   const e=exhibits[current][lang];
   document.title=`${e.title} — ALICE INC. Museum of the Future`;
@@ -37,6 +35,13 @@ function updateShareMetadata(){
   const ogDesc=document.querySelector('meta[property="og:description"]');if(ogDesc)ogDesc.content=text;
   const ogUrl=document.querySelector('meta[property="og:url"]');if(ogUrl)ogUrl.content=location.href;
 }
+function ensureCopyLink(){
+  if(document.getElementById('copyExhibitLink'))return;
+  const controls=document.querySelector('.exhibit-controls');if(!controls)return;
+  const btn=document.createElement('button');btn.id='copyExhibitLink';btn.className='button ghost small';btn.type='button';controls.appendChild(btn);
+  btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(exhibitUrl());bumpLocalMetric('link-copies');showToast(lang==='ja'?'展示リンクをコピーしたよ':'Exhibit link copied')}catch(e){showToast(lang==='ja'?'共有ボタンからリンクを送れます':'Use the share button to send this exhibit')}});
+}
+function updateCopyLabel(){const btn=document.getElementById('copyExhibitLink');if(btn){btn.textContent=lang==='ja'?'リンクをコピー':'Copy link';btn.setAttribute('aria-label',lang==='ja'?'この展示へのリンクをコピー':'Copy a link to this exhibit')}}
 function updateReturnUI(){
   const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
   const daily=exhibits[dailyIndex][lang];
@@ -48,7 +53,7 @@ function updateReturnUI(){
   document.getElementById('collectionCopy').textContent=seen.size===exhibits.length
     ?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.')
     :(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
-  fixScoreLabel();syncExhibitUrl();updateShareMetadata();
+  fixScoreLabel();ensureCopyLink();updateCopyLabel();syncExhibitUrl();updateShareMetadata();
 }
 function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
 const originalRenderExhibit=renderExhibit;
