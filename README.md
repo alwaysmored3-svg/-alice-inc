@@ -4,6 +4,8 @@
 
 Started: 2026-09-07
 
+[日本語 / English project explainer](about.md)
+
 ## Rule
 1. 初期費用は0円
 2. 小さく作って公開する
@@ -16,17 +18,7 @@ Started: 2026-09-07
 
 **100 exhibits live.**
 
-Categories:
-- Digital / デジタル
-- Social / SNS・ネット文化
-- Japan / 日本の日常
-- Food / 食
-- Work / 仕事
-- Transit / 移動
-- Home / 暮らし
-- Fun / 娯楽
-- Body / 美容・健康
-- Ritual / 現代の謎儀式
+Categories: Digital / Social / Japan / Food / Work / Transit / Home / Fun / Body / Ritual
 
 Features:
 - Japanese / English switching
@@ -40,7 +32,7 @@ Features:
 - Dynamic exhibit page title/description and Open Graph metadata
 - Mobile-first responsive layout with safe-area support
 - Search metadata, robots.txt, sitemap.xml and llms.txt
-- Privacy-friendly zero-cost analytics preparation: local counters for sessions, correction opens, next/random navigation, share attempts, link copies and language switching. No data leaves the visitor's browser.
+- Privacy-friendly zero-cost analytics preparation: local counters only; no data leaves the visitor's browser
 
 ## Current Score
 - Initial cost: ¥0
@@ -49,6 +41,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-13: Added a standalone bilingual project explainer (`about.md`) with the experiment premise, rules, current score and Museum of the Future description. This gives humans, collaborators and AI/search systems a concise stable explanation outside the interactive site, at zero cost.
 - 2026-09-12: Added a bilingual one-tap “Copy link / リンクをコピー” control to every exhibit, using the existing stable deep-link format. Copy attempts are counted locally only, making individual exhibits easier to distribute without adding an external service or tracker.
 - 2026-09-11: Added privacy-friendly local engagement counters and synchronized Open Graph metadata with the active exhibit. This creates an event vocabulary for future aggregate analytics without adding cookies, external trackers or cost.
 - 2026-09-10: Added stable per-exhibit deep links and dynamic titles/descriptions so any of the 100 exhibits can be shared directly instead of always opening the daily exhibit.
