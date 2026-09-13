@@ -41,7 +41,20 @@ function ensureCopyLink(){
   const btn=document.createElement('button');btn.id='copyExhibitLink';btn.className='button ghost small';btn.type='button';controls.appendChild(btn);
   btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(exhibitUrl());bumpLocalMetric('link-copies');showToast(lang==='ja'?'展示リンクをコピーしたよ':'Exhibit link copied')}catch(e){showToast(lang==='ja'?'共有ボタンからリンクを送れます':'Use the share button to send this exhibit')}});
 }
-function updateCopyLabel(){const btn=document.getElementById('copyExhibitLink');if(btn){btn.textContent=lang==='ja'?'リンクをコピー':'Copy link';btn.setAttribute('aria-label',lang==='ja'?'この展示へのリンクをコピー':'Copy a link to this exhibit')}}
+function ensureUnseenButton(){
+  if(document.getElementById('unseenExhibit'))return;
+  const controls=document.querySelector('.exhibit-controls');if(!controls)return;
+  const btn=document.createElement('button');btn.id='unseenExhibit';btn.className='button ghost small';btn.type='button';controls.insertBefore(btn,document.getElementById('copyExhibitLink'));
+  btn.addEventListener('click',()=>{
+    const seen=getSeen();const unseen=exhibits.map((e,i)=>({e,i})).filter(x=>!seen.has(x.e.no));
+    if(!unseen.length){showToast(lang==='ja'?'100展示コンプリート！':'All 100 exhibits complete!');return}
+    const choices=unseen.filter(x=>x.i!==current);const pool=choices.length?choices:unseen;current=pool[Math.floor(Math.random()*pool.length)].i;bumpLocalMetric('unseen-clicks');renderExhibit();document.getElementById('experiment').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function updateControlLabels(){
+  const copy=document.getElementById('copyExhibitLink');if(copy){copy.textContent=lang==='ja'?'リンクをコピー':'Copy link';copy.setAttribute('aria-label',lang==='ja'?'この展示へのリンクをコピー':'Copy a link to this exhibit')}
+  const unseen=document.getElementById('unseenExhibit');if(unseen){const left=exhibits.length-getSeen().size;unseen.textContent=left>0?(lang==='ja'?`未見の展示へ（残り${left}）`:`Unseen exhibit (${left} left)`):(lang==='ja'?'100展示コンプリート':'100 complete');unseen.setAttribute('aria-label',lang==='ja'?'まだ見ていない展示を開く':'Open an exhibit you have not seen')}
+}
 function updateReturnUI(){
   const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
   const daily=exhibits[dailyIndex][lang];
@@ -53,7 +66,7 @@ function updateReturnUI(){
   document.getElementById('collectionCopy').textContent=seen.size===exhibits.length
     ?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.')
     :(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
-  fixScoreLabel();ensureCopyLink();updateCopyLabel();syncExhibitUrl();updateShareMetadata();
+  fixScoreLabel();ensureCopyLink();ensureUnseenButton();updateControlLabels();syncExhibitUrl();updateShareMetadata();
 }
 function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
 const originalRenderExhibit=renderExhibit;
