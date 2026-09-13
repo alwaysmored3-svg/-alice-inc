@@ -24,6 +24,7 @@ Features:
 - Japanese / English switching
 - Daily exhibit
 - Random exhibit
+- Continue with an unseen exhibit, with remaining count
 - Collection progress (0–100)
 - Visit streak
 - Share action
@@ -41,6 +42,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-14: Added a bilingual “Unseen exhibit / 未見の展示へ” control that selects only exhibits the visitor has not viewed yet and shows the remaining count. This turns the existing 0–100 collection counter into a usable completion loop instead of making visitors repeatedly hit random and encounter duplicates. The action is measured locally only (`unseen-clicks`).
 - 2026-09-13: Added a standalone bilingual project explainer (`about.md`) with the experiment premise, rules, current score and Museum of the Future description. This gives humans, collaborators and AI/search systems a concise stable explanation outside the interactive site, at zero cost.
 - 2026-09-12: Added a bilingual one-tap “Copy link / リンクをコピー” control to every exhibit, using the existing stable deep-link format. Copy attempts are counted locally only, making individual exhibits easier to distribute without adding an external service or tracker.
 - 2026-09-11: Added privacy-friendly local engagement counters and synchronized Open Graph metadata with the active exhibit. This creates an event vocabulary for future aggregate analytics without adding cookies, external trackers or cost.
