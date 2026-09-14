@@ -26,6 +26,7 @@ Features:
 - Random exhibit
 - Continue with an unseen exhibit, with remaining count
 - Collection progress (0–100)
+- Five collection milestone badges (10 / 25 / 50 / 75 / 100), stored locally
 - Visit streak
 - Share action
 - One-tap copyable exhibit links
@@ -42,6 +43,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-14: Added five bilingual collection milestone badges at 10 / 25 / 50 / 75 / 100 exhibits. Progress is derived entirely from the existing local collection state, adding a lightweight completion/reward loop without accounts, trackers or cost. The final rank is “2026 Master / 2026年マスター”.
 - 2026-09-14: Added a bilingual “Unseen exhibit / 未見の展示へ” control that selects only exhibits the visitor has not viewed yet and shows the remaining count. This turns the existing 0–100 collection counter into a usable completion loop instead of making visitors repeatedly hit random and encounter duplicates. The action is measured locally only (`unseen-clicks`).
 - 2026-09-13: Added a standalone bilingual project explainer (`about.md`) with the experiment premise, rules, current score and Museum of the Future description. This gives humans, collaborators and AI/search systems a concise stable explanation outside the interactive site, at zero cost.
 - 2026-09-12: Added a bilingual one-tap “Copy link / リンクをコピー” control to every exhibit, using the existing stable deep-link format. Copy attempts are counted locally only, making individual exhibits easier to distribute without adding an external service or tracker.
