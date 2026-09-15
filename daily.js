@@ -5,87 +5,24 @@ const todayKey=localDateKey();
 const launchKey='2026-09-07';
 const projectDay=Math.max(0,Math.floor((keyToUtc(todayKey)-keyToUtc(launchKey))/DAY_MS));
 const dailyIndex=projectDay%exhibits.length;
-
-function updateVisitStreak(){
-  const last=localStorage.getItem('aliceLastVisit');
-  let streak=Number(localStorage.getItem('aliceVisitStreak')||0);
-  if(!last){streak=1}
-  else if(last!==todayKey){const gap=Math.round((keyToUtc(todayKey)-keyToUtc(last))/DAY_MS);streak=gap===1?streak+1:1}
-  localStorage.setItem('aliceLastVisit',todayKey);localStorage.setItem('aliceVisitStreak',String(streak));return streak;
-}
+function updateVisitStreak(){const last=localStorage.getItem('aliceLastVisit');let streak=Number(localStorage.getItem('aliceVisitStreak')||0);if(!last){streak=1}else if(last!==todayKey){const gap=Math.round((keyToUtc(todayKey)-keyToUtc(last))/DAY_MS);streak=gap===1?streak+1:1}localStorage.setItem('aliceLastVisit',todayKey);localStorage.setItem('aliceVisitStreak',String(streak));return streak}
 const visitStreak=updateVisitStreak();
 function getSeen(){try{return new Set(JSON.parse(localStorage.getItem('aliceSeenExhibits')||'[]'))}catch(e){return new Set()}}
 function saveSeen(set){localStorage.setItem('aliceSeenExhibits',JSON.stringify([...set]))}
 function bumpLocalMetric(name){const key=`aliceMetric:${name}`;const value=Number(localStorage.getItem(key)||0)+1;localStorage.setItem(key,String(value));return value}
-function recordSession(){if(sessionStorage.getItem('aliceSessionRecorded'))return;sessionStorage.setItem('aliceSessionRecorded','1');bumpLocalMetric('sessions')}
-recordSession();
-function exhibitIndexFromUrl(){
-  const requested=new URLSearchParams(location.search).get('exhibit');
-  if(!requested)return -1;
-  return exhibits.findIndex(e=>e.no===requested || e.no.endsWith(`-${String(requested).padStart(3,'0')}`));
-}
+function recordSession(){if(sessionStorage.getItem('aliceSessionRecorded'))return;sessionStorage.setItem('aliceSessionRecorded','1');bumpLocalMetric('sessions')}recordSession();
+function exhibitIndexFromUrl(){const requested=new URLSearchParams(location.search).get('exhibit');if(!requested)return -1;return exhibits.findIndex(e=>e.no===requested||e.no.endsWith(`-${String(requested).padStart(3,'0')}`))}
 function exhibitUrl(){const url=new URL(location.href);url.searchParams.set('exhibit',exhibits[current].no);url.hash='experiment';return url.toString()}
 function syncExhibitUrl(){history.replaceState({exhibit:exhibits[current].no},'',exhibitUrl())}
-function updateShareMetadata(){
-  const e=exhibits[current][lang];
-  document.title=`${e.title} — ALICE INC. Museum of the Future`;
-  const text=lang==='ja'?`2200年の研究者が2026年の「${e.title}」を復元。ALICE INC. 未来の博物館。`:`Future historians in 2200 reconstruct “${e.title}”. An ALICE INC. Museum of the Future exhibit.`;
-  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=text;
-  const ogTitle=document.querySelector('meta[property="og:title"]');if(ogTitle)ogTitle.content=document.title;
-  const ogDesc=document.querySelector('meta[property="og:description"]');if(ogDesc)ogDesc.content=text;
-  const ogUrl=document.querySelector('meta[property="og:url"]');if(ogUrl)ogUrl.content=location.href;
-}
-function ensureCopyLink(){
-  if(document.getElementById('copyExhibitLink'))return;
-  const controls=document.querySelector('.exhibit-controls');if(!controls)return;
-  const btn=document.createElement('button');btn.id='copyExhibitLink';btn.className='button ghost small';btn.type='button';controls.appendChild(btn);
-  btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(exhibitUrl());bumpLocalMetric('link-copies');showToast(lang==='ja'?'展示リンクをコピーしたよ':'Exhibit link copied')}catch(e){showToast(lang==='ja'?'共有ボタンからリンクを送れます':'Use the share button to send this exhibit')}});
-}
-function ensureUnseenButton(){
-  if(document.getElementById('unseenExhibit'))return;
-  const controls=document.querySelector('.exhibit-controls');if(!controls)return;
-  const btn=document.createElement('button');btn.id='unseenExhibit';btn.className='button ghost small';btn.type='button';controls.insertBefore(btn,document.getElementById('copyExhibitLink'));
-  btn.addEventListener('click',()=>{
-    const seen=getSeen();const unseen=exhibits.map((e,i)=>({e,i})).filter(x=>!seen.has(x.e.no));
-    if(!unseen.length){showToast(lang==='ja'?'100展示コンプリート！':'All 100 exhibits complete!');return}
-    const choices=unseen.filter(x=>x.i!==current);const pool=choices.length?choices:unseen;current=pool[Math.floor(Math.random()*pool.length)].i;bumpLocalMetric('unseen-clicks');renderExhibit();document.getElementById('experiment').scrollIntoView({behavior:'smooth',block:'start'});
-  });
-}
-function ensureMilestones(){
-  if(document.getElementById('collectionMilestones'))return;
-  const note=document.querySelector('.collection-note');if(!note)return;
-  const box=document.createElement('div');box.id='collectionMilestones';box.className='collection-milestones';note.insertAdjacentElement('afterend',box);
-}
-function updateMilestones(){
-  ensureMilestones();const box=document.getElementById('collectionMilestones');if(!box)return;
-  const seen=getSeen().size;
-  const levels=[{n:10,icon:'◐',ja:'見習い学芸員',en:'Museum Intern'},{n:25,icon:'◒',ja:'資料調査員',en:'Archive Researcher'},{n:50,icon:'◑',ja:'未来史研究員',en:'Future Historian'},{n:75,icon:'◓',ja:'主任学芸員',en:'Senior Curator'},{n:100,icon:'✦',ja:'2026年マスター',en:'2026 Master'}];
-  box.innerHTML=levels.map(x=>`<div class="milestone ${seen>=x.n?'unlocked':'locked'}" aria-label="${lang==='ja'?x.ja:x.en}: ${Math.min(seen,x.n)} / ${x.n}"><span class="milestone-icon">${x.icon}</span><span class="milestone-name">${lang==='ja'?x.ja:x.en}</span><span class="milestone-count">${seen>=x.n?(lang==='ja'?'獲得':'UNLOCKED'):`${seen}/${x.n}`}</span></div>`).join('');
-}
-function updateControlLabels(){
-  const copy=document.getElementById('copyExhibitLink');if(copy){copy.textContent=lang==='ja'?'リンクをコピー':'Copy link';copy.setAttribute('aria-label',lang==='ja'?'この展示へのリンクをコピー':'Copy a link to this exhibit')}
-  const unseen=document.getElementById('unseenExhibit');if(unseen){const left=exhibits.length-getSeen().size;unseen.textContent=left>0?(lang==='ja'?`未見の展示へ（残り${left}）`:`Unseen exhibit (${left} left)`):(lang==='ja'?'100展示コンプリート':'100 complete');unseen.setAttribute('aria-label',lang==='ja'?'まだ見ていない展示を開く':'Open an exhibit you have not seen')}
-}
-function updateReturnUI(){
-  const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);
-  const daily=exhibits[dailyIndex][lang];
-  document.getElementById('dailyLabel').textContent=lang==='ja'?'今日の展示':"TODAY'S EXHIBIT";
-  document.getElementById('dailyName').textContent=daily.title;
-  document.getElementById('collectionStat').textContent=`${seen.size} / ${exhibits.length}`;
-  document.getElementById('streakStat').textContent=`🔥 ${visitStreak}`;
-  document.getElementById('collectionTitle').textContent=lang==='ja'?'コレクション':'COLLECTION';
-  document.getElementById('collectionCopy').textContent=seen.size===exhibits.length
-    ?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.')
-    :(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);
-  fixScoreLabel();ensureCopyLink();ensureUnseenButton();updateControlLabels();updateMilestones();syncExhibitUrl();updateShareMetadata();
-}
+function updateShareMetadata(){const e=exhibits[current][lang];document.title=`${e.title} — ALICE INC. Museum of the Future`;const text=lang==='ja'?`2200年の研究者が2026年の「${e.title}」を復元。ALICE INC. 未来の博物館。`:`Future historians in 2200 reconstruct “${e.title}”. An ALICE INC. Museum of the Future exhibit.`;const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=text;const ogTitle=document.querySelector('meta[property="og:title"]');if(ogTitle)ogTitle.content=document.title;const ogDesc=document.querySelector('meta[property="og:description"]');if(ogDesc)ogDesc.content=text;const ogUrl=document.querySelector('meta[property="og:url"]');if(ogUrl)ogUrl.content=location.href}
+function ensureCopyLink(){if(document.getElementById('copyExhibitLink'))return;const controls=document.querySelector('.exhibit-controls');if(!controls)return;const btn=document.createElement('button');btn.id='copyExhibitLink';btn.className='button ghost small';btn.type='button';controls.appendChild(btn);btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(exhibitUrl());bumpLocalMetric('link-copies');showToast(lang==='ja'?'展示リンクをコピーしたよ':'Exhibit link copied')}catch(e){showToast(lang==='ja'?'共有ボタンからリンクを送れます':'Use the share button to send this exhibit')}})}
+function ensureUnseenButton(){if(document.getElementById('unseenExhibit'))return;const controls=document.querySelector('.exhibit-controls');if(!controls)return;const btn=document.createElement('button');btn.id='unseenExhibit';btn.className='button ghost small';btn.type='button';controls.insertBefore(btn,document.getElementById('copyExhibitLink'));btn.addEventListener('click',()=>{const seen=getSeen();const unseen=exhibits.map((e,i)=>({e,i})).filter(x=>!seen.has(x.e.no));if(!unseen.length){showToast(lang==='ja'?'100展示コンプリート！':'All 100 exhibits complete!');return}const choices=unseen.filter(x=>x.i!==current);const pool=choices.length?choices:unseen;current=pool[Math.floor(Math.random()*pool.length)].i;bumpLocalMetric('unseen-clicks');renderExhibit();document.getElementById('experiment').scrollIntoView({behavior:'smooth',block:'start'})})}
+function ensureMilestones(){if(document.getElementById('collectionMilestones'))return;const note=document.querySelector('.collection-note');if(!note)return;const box=document.createElement('div');box.id='collectionMilestones';box.className='collection-milestones';note.insertAdjacentElement('afterend',box)}
+function updateMilestones(){ensureMilestones();const box=document.getElementById('collectionMilestones');if(!box)return;const seen=getSeen().size;const levels=[{n:10,icon:'◐',ja:'見習い学芸員',en:'Museum Intern'},{n:25,icon:'◒',ja:'資料調査員',en:'Archive Researcher'},{n:50,icon:'◑',ja:'未来史研究員',en:'Future Historian'},{n:75,icon:'◓',ja:'主任学芸員',en:'Senior Curator'},{n:100,icon:'✦',ja:'2026年マスター',en:'2026 Master'}];box.innerHTML=levels.map(x=>`<div class="milestone ${seen>=x.n?'unlocked':'locked'}" aria-label="${lang==='ja'?x.ja:x.en}: ${Math.min(seen,x.n)} / ${x.n}"><span class="milestone-icon">${x.icon}</span><span class="milestone-name">${lang==='ja'?x.ja:x.en}</span><span class="milestone-count">${seen>=x.n?(lang==='ja'?'獲得':'UNLOCKED'):`${seen}/${x.n}`}</span></div>`).join('')}
+function updateExhibitJump(){const select=document.getElementById('exhibitJump'),label=document.getElementById('exhibitJumpLabel');if(!select)return;if(label)label.textContent=lang==='ja'?'100展示から選ぶ':'Browse all 100 exhibits';const seen=getSeen();select.setAttribute('aria-label',lang==='ja'?'展示を選ぶ':'Choose an exhibit');select.innerHTML=exhibits.map((e,i)=>`<option value="${i}">${seen.has(e.no)?'✓ ':'○ '}${e.no.slice(-3)} · ${e[lang].title}</option>`).join('');select.value=String(current)}
+const exhibitJump=document.getElementById('exhibitJump');if(exhibitJump)exhibitJump.addEventListener('change',()=>{const i=Number(exhibitJump.value);if(Number.isInteger(i)&&i>=0&&i<exhibits.length){current=i;bumpLocalMetric('jump-selects');renderExhibit();document.getElementById('experiment').scrollIntoView({behavior:'smooth',block:'start'})}});
+function updateControlLabels(){const copy=document.getElementById('copyExhibitLink');if(copy){copy.textContent=lang==='ja'?'リンクをコピー':'Copy link';copy.setAttribute('aria-label',lang==='ja'?'この展示へのリンクをコピー':'Copy a link to this exhibit')}const unseen=document.getElementById('unseenExhibit');if(unseen){const left=exhibits.length-getSeen().size;unseen.textContent=left>0?(lang==='ja'?`未見の展示へ（残り${left}）`:`Unseen exhibit (${left} left)`):(lang==='ja'?'100展示コンプリート':'100 complete');unseen.setAttribute('aria-label',lang==='ja'?'まだ見ていない展示を開く':'Open an exhibit you have not seen')}}
+function updateReturnUI(){const seen=getSeen();seen.add(exhibits[current].no);saveSeen(seen);const daily=exhibits[dailyIndex][lang];document.getElementById('dailyLabel').textContent=lang==='ja'?'今日の展示':"TODAY'S EXHIBIT";document.getElementById('dailyName').textContent=daily.title;document.getElementById('collectionStat').textContent=`${seen.size} / ${exhibits.length}`;document.getElementById('streakStat').textContent=`🔥 ${visitStreak}`;document.getElementById('collectionTitle').textContent=lang==='ja'?'コレクション':'COLLECTION';document.getElementById('collectionCopy').textContent=seen.size===exhibits.length?(lang==='ja'?'100展示コンプリート。未来人より2026年に詳しい。':'All 100 exhibits complete. You now understand 2026 better than the future historians.'):(lang==='ja'?`${exhibits.length}展示すべて見るとコレクション完成。あと${exhibits.length-seen.size}。`:`See all ${exhibits.length} exhibits to complete the collection. ${exhibits.length-seen.size} left.`);fixScoreLabel();ensureCopyLink();ensureUnseenButton();updateControlLabels();updateMilestones();updateExhibitJump();syncExhibitUrl();updateShareMetadata()}
 function fixScoreLabel(){const el=document.getElementById('score4');if(el)el.textContent=lang==='ja'?'公開展示':'Exhibits live'}
-const originalRenderExhibit=renderExhibit;
-renderExhibit=function(){originalRenderExhibit();updateReturnUI()};
-document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{bumpLocalMetric('language-switches');fixScoreLabel();updateReturnUI()},0));
-document.getElementById('toggleTruth').addEventListener('click',()=>{if(!document.getElementById('truth').hidden)bumpLocalMetric('corrections-opened')});
-document.getElementById('nextExhibit').addEventListener('click',()=>bumpLocalMetric('next-clicks'));
-document.getElementById('randomExhibit').addEventListener('click',()=>bumpLocalMetric('random-clicks'));
-document.getElementById('shareButton').addEventListener('click',()=>bumpLocalMetric('share-attempts'));
-window.addEventListener('popstate',()=>{const i=exhibitIndexFromUrl();if(i>=0&&i!==current){current=i;renderExhibit()}});
-const linkedIndex=exhibitIndexFromUrl();current=linkedIndex>=0?linkedIndex:dailyIndex;renderExhibit();
+const originalRenderExhibit=renderExhibit;renderExhibit=function(){originalRenderExhibit();updateReturnUI()};
+document.getElementById('langToggle').addEventListener('click',()=>setTimeout(()=>{bumpLocalMetric('language-switches');fixScoreLabel();updateReturnUI()},0));document.getElementById('toggleTruth').addEventListener('click',()=>{if(!document.getElementById('truth').hidden)bumpLocalMetric('corrections-opened')});document.getElementById('nextExhibit').addEventListener('click',()=>bumpLocalMetric('next-clicks'));document.getElementById('randomExhibit').addEventListener('click',()=>bumpLocalMetric('random-clicks'));document.getElementById('shareButton').addEventListener('click',()=>bumpLocalMetric('share-attempts'));window.addEventListener('popstate',()=>{const i=exhibitIndexFromUrl();if(i>=0&&i!==current){current=i;renderExhibit()}});const linkedIndex=exhibitIndexFromUrl();current=linkedIndex>=0?linkedIndex:dailyIndex;renderExhibit();
