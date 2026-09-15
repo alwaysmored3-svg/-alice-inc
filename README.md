@@ -24,6 +24,7 @@ Features:
 - Japanese / English switching
 - Daily exhibit
 - Random exhibit
+- Browse all 100 exhibits from a bilingual jump navigator; viewed exhibits are marked locally
 - Continue with an unseen exhibit, with remaining count
 - Collection progress (0–100)
 - Five collection milestone badges (10 / 25 / 50 / 75 / 100), stored locally
@@ -43,6 +44,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-15: Added a bilingual 100-exhibit jump navigator above the museum card. Visitors can now intentionally browse the full collection instead of relying only on next/random/unseen controls; already-viewed exhibits receive a local check mark and jump usage is measured locally (`jump-selects`). The control is responsive and uses native selection UI for reliable mobile use.
 - 2026-09-14: Added five bilingual collection milestone badges at 10 / 25 / 50 / 75 / 100 exhibits. Progress is derived entirely from the existing local collection state, adding a lightweight completion/reward loop without accounts, trackers or cost. The final rank is “2026 Master / 2026年マスター”.
 - 2026-09-14: Added a bilingual “Unseen exhibit / 未見の展示へ” control that selects only exhibits the visitor has not viewed yet and shows the remaining count. This turns the existing 0–100 collection counter into a usable completion loop instead of making visitors repeatedly hit random and encounter duplicates. The action is measured locally only (`unseen-clicks`).
 - 2026-09-13: Added a standalone bilingual project explainer (`about.md`) with the experiment premise, rules, current score and Museum of the Future description. This gives humans, collaborators and AI/search systems a concise stable explanation outside the interactive site, at zero cost.
