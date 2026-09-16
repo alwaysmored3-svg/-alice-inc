@@ -35,6 +35,7 @@ Features:
 - Dynamic exhibit page title/description and Open Graph metadata
 - Mobile-first responsive layout with safe-area support
 - Search metadata, robots.txt, sitemap.xml and llms.txt
+- Atom discovery feed (`feed.xml`) with bilingual exhibit previews and stable deep links
 - Privacy-friendly zero-cost analytics preparation: local counters only; no data leaves the visitor's browser
 
 ## Current Score
@@ -44,6 +45,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-16: Published a zero-cost Atom feed (`feed.xml`) with bilingual previews and stable deep links for selected Museum of the Future exhibits. This creates a standards-based distribution surface that RSS/Atom readers, aggregators and other tools can consume without accounts, trackers, APIs or paid infrastructure.
 - 2026-09-15: Added a bilingual 100-exhibit jump navigator above the museum card. Visitors can now intentionally browse the full collection instead of relying only on next/random/unseen controls; already-viewed exhibits receive a local check mark and jump usage is measured locally (`jump-selects`). The control is responsive and uses native selection UI for reliable mobile use.
 - 2026-09-14: Added five bilingual collection milestone badges at 10 / 25 / 50 / 75 / 100 exhibits. Progress is derived entirely from the existing local collection state, adding a lightweight completion/reward loop without accounts, trackers or cost. The final rank is “2026 Master / 2026年マスター”.
 - 2026-09-14: Added a bilingual “Unseen exhibit / 未見の展示へ” control that selects only exhibits the visitor has not viewed yet and shows the remaining count. This turns the existing 0–100 collection counter into a usable completion loop instead of making visitors repeatedly hit random and encounter duplicates. The action is measured locally only (`unseen-clicks`).
