@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+  <title>ALICE INC. — Museum of the Future</title>
+  <subtitle>2200年の研究者が2026年を少し間違って復元する、日英バイリンガル未来博物館。</subtitle>
+  <id>https://alwaysmored3-svg.github.io/-alice-inc/</id>
+  <link href="https://alwaysmored3-svg.github.io/-alice-inc/" />
+  <link href="https://alwaysmored3-svg.github.io/-alice-inc/feed.xml" rel="self" type="application/atom+xml" />
+  <updated>2026-09-16T00:00:00+09:00</updated>
+  <author><name>ALICE INC.</name></author>
+  <entry>
+    <title>携帯型祈祷板「スマートフォン」 / Portable Prayer Slab “Smartphone”</title>
+    <id>https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-001#experiment</id>
+    <link href="https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-001#experiment" />
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>一日に数時間見つめ続けた黒い板。未来人は宗教用具だった可能性を疑っています。 / A black slab humans stared at for hours every day; future historians suspect a religious purpose.</summary>
+  </entry>
+  <entry>
+    <title>夜間食料神殿「コンビニエンスストア」 / Night Supply Shrine “Convenience Store”</title>
+    <id>https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-002#experiment</id>
+    <link href="https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-002#experiment" />
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>24時間灯りを絶やさない都市の補給施設。 / An always-lit urban supply facility that future historians classify as a shrine or lighthouse.</summary>
+  </entry>
+  <entry>
+    <title>承認値交換網「SNS」 / Approval-Point Exchange Network “Social Media”</title>
+    <id>https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-003#experiment</id>
+    <link href="https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-003#experiment" />
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>写真・意見・食事・怒りを投稿し、ハート型記号を交換した巨大社会装置。 / A social machine for exchanging photographs, opinions, meals, anger and heart-shaped approval points.</summary>
+  </entry>
+  <entry>
+    <title>降雨時集団発生器具「傘」 / Rain-Triggered Population Device “Umbrella”</title>
+    <id>https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-004#experiment</id>
+    <link href="https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-004#experiment" />
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>雨と同時に都市へ大量発生し、駅や店に置き去りにされた器具。 / A device that suddenly appeared across cities during rain and was frequently abandoned at stations and shops.</summary>
+  </entry>
+  <entry>
+    <title>会話遮断装置「ワイヤレスイヤホン」 / Conversation Blocking Device “Wireless Earbuds”</title>
+    <id>https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-005#experiment</id>
+    <link href="https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-005#experiment" />
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>都市人が個人用BGMを持ち歩き、周囲との接触を調整するための器具。 / A device for carrying a private soundtrack and regulating contact with the surrounding world.</summary>
+  </entry>
+</feed>
