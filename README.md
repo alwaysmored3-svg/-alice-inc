@@ -34,6 +34,7 @@ Features:
 - Shareable exhibit deep links (`?exhibit=2026-001#experiment`)
 - Dynamic exhibit page title/description and Open Graph metadata
 - Mobile-first responsive layout with safe-area support
+- Keyboard/screen-reader basics: bilingual skip link, visible focus indicators, live status announcements and reduced-motion support
 - Search metadata, robots.txt, sitemap.xml and llms.txt
 - Atom discovery feed (`feed.xml`) with bilingual exhibit previews and stable deep links, advertised from the HTML head for reader autodiscovery
 - Automatically current project-day label derived from the launch date
@@ -46,6 +47,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-19: Shipped a zero-cost accessibility pass: bilingual skip-to-exhibits navigation, strong `:focus-visible` keyboard indicators, polite live announcements for status/toast messages, decorative-art hiding for screen readers, navigation labeling, and `prefers-reduced-motion` support. The museum remains visually unchanged for pointer users while becoming more usable with keyboards, assistive technology and motion-sensitive settings.
 - 2026-09-18: Connected the existing Atom feed to the public page with standards-based `<link rel="alternate">` autodiscovery, added Japanese/English Open Graph locale metadata, and replaced the stale hard-coded `DAY 002` hero label with an automatically calculated project day. This improves discovery while preventing the public experiment header from silently going out of date, with no external service or cost.
 - 2026-09-16: Published a zero-cost Atom feed (`feed.xml`) with bilingual previews and stable deep links for selected Museum of the Future exhibits. This creates a standards-based distribution surface that RSS/Atom readers, aggregators and other tools can consume without accounts, trackers, APIs or paid infrastructure.
 - 2026-09-15: Added a bilingual 100-exhibit jump navigator above the museum card. Visitors can now intentionally browse the full collection instead of relying only on next/random/unseen controls; already-viewed exhibits receive a local check mark and jump usage is measured locally (`jump-selects`). The control is responsive and uses native selection UI for reliable mobile use.
