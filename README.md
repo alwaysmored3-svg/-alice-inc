@@ -35,6 +35,7 @@ Features:
 - Dynamic exhibit page title/description and Open Graph metadata
 - Responsive bright-gallery visual system with safe-area support
 - Generated exhibit artwork renderer with graceful emoji fallback for exhibits without art
+- Museum-first page flow: the live exhibit now appears before the project explainer
 - Keyboard/screen-reader basics: bilingual skip link, visible focus indicators, live status announcements and reduced-motion support
 - Search metadata, robots.txt, sitemap.xml and llms.txt
 - Atom discovery feed (`feed.xml`) with bilingual exhibit previews and stable deep links, advertised from the HTML head for reader autodiscovery
@@ -48,6 +49,7 @@ Features:
 - Revenue: ¥0
 
 ## Shipping log
+- 2026-09-23: Followed through on the bright-gallery redesign by removing the leftover near-black generated-art stage in `art.css`. Generated artwork now sits in a warm white / pale aqua archive display with softer shadows and an understated “ARCHIVE · 2200” museum label. Also reordered the page visually so visitors reach Experiment 001 immediately after the hero, before the project-method explainer; this addresses the real-device feedback that the museum itself took too long to reach.
 - 2026-09-21: Connected the existing generated-art library to the live exhibit renderer through a small `art-render.js` bridge. Exhibits with generated artwork now render the image responsively; exhibits without artwork keep the existing emoji fallback, so the visual upgrade can be rolled out gradually without breaking the 100-item collection. Also aligned the browser theme color with the new bright-gallery palette.
 - 2026-09-20: Reworked the museum's art direction in response to real iPhone screenshots: replaced the near-black interface with a warm ivory / translucent white / pale aqua gallery palette, reduced oversized mobile hero typography, softened cards and shadows, brightened the exhibit stage, and tightened vertical spacing so the actual museum appears sooner. Existing exhibit logic and accessibility behavior remain intact. Public-device verification is still required after GitHub Pages deploys the CSS update.
 - 2026-09-19: Shipped a zero-cost accessibility pass: bilingual skip-to-exhibits navigation, strong `:focus-visible` keyboard indicators, polite live announcements for status/toast messages, decorative-art hiding for screen readers, navigation labeling, and `prefers-reduced-motion` support. The museum remains visually unchanged for pointer users while becoming more usable with keyboards, assistive technology and motion-sensitive settings.
