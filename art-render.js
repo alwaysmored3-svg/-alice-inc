@@ -13,7 +13,9 @@
       visual.textContent='';
       const img=document.createElement('img');
       img.src=src;
-      img.alt='';
+      const activeLang=(typeof lang!=='undefined'&&lang==='en')?'en':'ja';
+      const exhibitText=exhibit[activeLang] || exhibit.ja || exhibit.en;
+      img.alt=exhibitText?.title ? `${exhibitText.title} — ${exhibit.no}` : `ALICE INC. exhibit ${exhibit.no}`;
       img.decoding='async';
       img.loading='eager';
       visual.appendChild(img);
