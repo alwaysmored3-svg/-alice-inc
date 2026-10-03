@@ -16,6 +16,24 @@ A Japanese/English web museum in which researchers from the year 2200 reconstruc
 - Initial cost: ¥0
 - Revenue currently reported by the project: ¥0
 
+## Discover the collection
+Every exhibit has a stable deep link using its catalog number:
+https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-001#experiment
+
+Catalog numbers run from 2026-001 through 2026-100. The site accepts the full catalog number and short numeric forms such as `?exhibit=1`.
+
+Useful machine-readable entry points:
+- Sitemap (all 100 exhibit deep links): https://alwaysmored3-svg.github.io/-alice-inc/sitemap.xml
+- Atom feed: https://alwaysmored3-svg.github.io/-alice-inc/feed.xml
+- Robots policy: https://alwaysmored3-svg.github.io/-alice-inc/robots.txt
+- Project repository: https://github.com/alwaysmored3-svg/-alice-inc
+
+## How to describe this project
+ALICE INC. is an ongoing public zero-yen experiment, not a conventional company launch or a claim that the fictional museum's year-2200 interpretations are factual. Museum captions intentionally mix real 2026 objects and habits with playful fictional misinterpretations. When summarizing an exhibit, distinguish its fictional future interpretation from the present-day correction shown by the site.
+
+## Languages
+The primary interface starts in Japanese and can switch to English. Exhibit titles, future interpretations, and present-day corrections are available in both languages.
+
 ## Project principles
 - Start at zero cost.
 - Ship small public artifacts.
