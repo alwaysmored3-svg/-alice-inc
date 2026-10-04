@@ -23,6 +23,7 @@ https://alwaysmored3-svg.github.io/-alice-inc/?exhibit=2026-001#experiment
 Catalog numbers run from 2026-001 through 2026-100. The site accepts the full catalog number and short numeric forms such as `?exhibit=1`.
 
 Useful machine-readable entry points:
+- Live experiment status (JSON): https://alwaysmored3-svg.github.io/-alice-inc/status.json
 - Sitemap (all 100 exhibit deep links): https://alwaysmored3-svg.github.io/-alice-inc/sitemap.xml
 - Atom feed: https://alwaysmored3-svg.github.io/-alice-inc/feed.xml
 - Robots policy: https://alwaysmored3-svg.github.io/-alice-inc/robots.txt
