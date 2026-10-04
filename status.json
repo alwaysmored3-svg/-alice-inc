@@ -1,0 +1,27 @@
+{
+  "project": "ALICE INC.",
+  "experiment": {
+    "id": "001",
+    "name": "Museum of the Future",
+    "status": "public",
+    "public_url": "https://alwaysmored3-svg.github.io/-alice-inc/",
+    "started": "2026-09-07",
+    "exhibits": 100,
+    "languages": ["ja", "en"],
+    "initial_cost_jpy": 0,
+    "revenue_jpy": 0
+  },
+  "principles": [
+    "start at zero cost",
+    "ship small public artifacts",
+    "observe real reactions",
+    "grow what earns attention",
+    "record successes and failures openly"
+  ],
+  "machine_readable": {
+    "sitemap": "https://alwaysmored3-svg.github.io/-alice-inc/sitemap.xml",
+    "feed": "https://alwaysmored3-svg.github.io/-alice-inc/feed.xml",
+    "llms": "https://alwaysmored3-svg.github.io/-alice-inc/llms.txt"
+  },
+  "updated": "2026-10-05"
+}
