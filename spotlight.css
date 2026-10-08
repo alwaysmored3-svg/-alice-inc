@@ -1,0 +1,24 @@
+/* Featured archive and standalone exhibit — zero-cost, responsive, no JavaScript required. */
+.spotlight-feature{margin:26px 0 0}
+.spotlight-feature a{display:grid;grid-template-columns:minmax(180px,.85fr) minmax(0,1.15fr);overflow:hidden;border:1px solid var(--line);border-radius:24px;background:var(--panel);box-shadow:0 16px 42px rgba(45,70,65,.08);transition:transform .2s ease,box-shadow .2s ease}
+.spotlight-feature a:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(45,70,65,.12)}
+.spotlight-feature a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.spotlight-feature img{display:block;width:100%;height:100%;min-height:225px;object-fit:cover;background:var(--soft)}
+.spotlight-feature-copy{padding:28px 30px;display:flex;flex-direction:column;justify-content:center;gap:9px;min-width:0}
+.spotlight-feature-copy .eyebrow{margin:0}
+.spotlight-feature-copy strong{font-size:clamp(22px,3vw,32px);line-height:1.25;letter-spacing:-.03em}
+.spotlight-feature-copy .subtitle{color:var(--muted);font-size:14px}
+.spotlight-feature-copy .spotlight-cta{color:var(--accent);font-weight:850;margin-top:8px}
+.spotlight-layout{padding:70px 0 95px}
+.spotlight-layout .spotlight-intro{max-width:760px;margin-bottom:28px}
+.spotlight-layout .spotlight-intro h1{font-size:clamp(36px,6vw,65px);line-height:1.13}
+.spotlight-layout .spotlight-intro p{color:var(--muted)}
+.spotlight-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:0 22px 55px rgba(45,70,65,.09)}
+.spotlight-detail img{display:block;width:100%;height:100%;object-fit:cover;background:var(--soft)}
+.spotlight-detail-copy{padding:clamp(24px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
+.spotlight-detail-copy h2{font-size:clamp(23px,3vw,34px);line-height:1.3;margin:8px 0 12px}
+.spotlight-detail-copy p{margin:8px 0;line-height:1.85}
+.spotlight-detail-copy p[lang="en"]{color:var(--muted)}
+.spotlight-detail-copy .button{align-self:flex-start;margin-top:22px}
+@media(max-width:760px){.spotlight-feature a,.spotlight-detail{grid-template-columns:1fr}.spotlight-feature img{height:auto;min-height:0;aspect-ratio:1.65;object-fit:cover}.spotlight-feature-copy{padding:22px}.spotlight-layout{padding:42px 0 64px}.spotlight-detail img{height:auto;aspect-ratio:1.15}.spotlight-detail-copy{padding:24px}.spotlight-detail-copy .button{width:100%}}
+@media(prefers-reduced-motion:reduce){.spotlight-feature a{transition:none}.spotlight-feature a:hover{transform:none}}
