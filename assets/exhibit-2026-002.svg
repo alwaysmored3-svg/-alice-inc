@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 880">
+<title>Night Supply Shrine — Exhibit 2026-002</title>
+<defs><linearGradient id="sky" x2="1" y2="1"><stop stop-color="#eef9f4"/><stop offset="1" stop-color="#c7e2dd"/></linearGradient></defs>
+<rect width="960" height="880" fill="url(#sky)"/>
+<rect x="50" y="95" width="860" height="680" rx="32" fill="#274d59"/>
+<circle cx="765" cy="210" r="47" fill="#f7e9bb"/>
+<g fill="#bbd8d1" opacity=".3"><rect x="70" y="415" width="145" height="250"/><rect x="754" y="370" width="132" height="295"/></g>
+<path d="M480 215L160 535H800Z" fill="#f8eab8" opacity=".16"/>
+<rect x="210" y="380" width="540" height="320" rx="14" fill="#e6f2e9"/>
+<rect x="234" y="454" width="492" height="226" fill="#c3e4d7"/>
+<path d="M340 455v225M620 455v225M234 550h492" stroke="#82b4a8" stroke-width="8"/>
+<rect x="390" y="482" width="180" height="198" fill="#e9f7ed" stroke="#59948a" stroke-width="7"/>
+<path d="M480 482v198" stroke="#59948a" stroke-width="5"/>
+<circle cx="465" cy="585" r="6" fill="#337b70"/><circle cx="495" cy="585" r="6" fill="#337b70"/>
+<path d="M199 380h562l-28 74H227Z" fill="#fff9e7"/>
+<path d="M225 409h510" stroke="#168f84" stroke-width="16"/>
+<path d="M225 433h510" stroke="#e8b278" stroke-width="8"/>
+<rect x="348" y="315" width="264" height="65" rx="12" fill="#f7f6e8"/>
+<text x="480" y="358" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#286b64" text-anchor="middle">24H SUPPLY</text>
+<g fill="#315c57" font-family="Arial,sans-serif"><text x="60" y="65" font-size="22">ALICE INC.</text><text x="900" y="65" text-anchor="end" font-size="16">ARCHIVE / 2200</text><text x="60" y="822" font-size="18">NIGHT SUPPLY SHRINE</text><text x="900" y="822" text-anchor="end" font-size="18">2026 / 002</text></g>
+</svg>
