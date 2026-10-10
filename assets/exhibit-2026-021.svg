@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 880" role="img" aria-labelledby="title desc">
+<title id="title">Night Supply Shrine — Archive 2026-021</title>
+<desc id="desc">An illuminated Japanese convenience store in a quiet night city, interpreted as a beacon by future historians.</desc>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#153c4c"/><stop offset=".7" stop-color="#315b63"/><stop offset="1" stop-color="#b4d6cc"/></linearGradient>
+<linearGradient id="halo" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5edb4" stop-opacity=".6"/><stop offset="1" stop-color="#f5edb4" stop-opacity="0"/></linearGradient>
+<linearGradient id="windows" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff6cc"/><stop offset="1" stop-color="#b7e5d6"/></linearGradient>
+</defs>
+<rect width="960" height="880" fill="#f6f3ed"/>
+<rect x="40" y="92" width="880" height="685" rx="26" fill="url(#sky)"/>
+<circle cx="761" cy="206" r="48" fill="#f5eec9"/>
+<circle cx="761" cy="206" r="66" fill="none" stroke="#e4e6c9" opacity=".4"/>
+<g fill="#e2eee4"><circle cx="174" cy="168" r="3"/><circle cx="300" cy="212" r="2"/><circle cx="614" cy="164" r="3"/><circle cx="833" cy="338" r="2"/><circle cx="95" cy="289" r="2"/></g>
+<g fill="#274a54"><rect x="40" y="410" width="146" height="290"/><rect x="169" y="475" width="108" height="225"/><rect x="739" y="445" width="120" height="255"/><rect x="838" y="386" width="82" height="314"/></g>
+<g fill="#94c4bc" opacity=".45"><rect x="68" y="450" width="28" height="34"/><rect x="112" y="450" width="28" height="34"/><rect x="197" y="504" width="30" height="30"/><rect x="778" y="487" width="26" height="35"/><rect x="870" y="430" width="22" height="32"/></g>
+<path d="M480 254 228 635 732 635Z" fill="url(#halo)"/>
+<ellipse cx="480" cy="714" rx="340" ry="53" fill="#d8f1d9" opacity=".36"/>
+<rect x="184" y="403" width="592" height="310" rx="12" fill="#f5f5e9" stroke="#b1cfc6" stroke-width="8"/>
+<rect x="205" y="483" width="550" height="207" fill="url(#windows)"/>
+<g stroke="#55968c" stroke-width="8"><path d="M344 484v206M616 484v206M205 586h550"/></g>
+<rect x="398" y="513" width="164" height="177" fill="#d3eee2" stroke="#43877f" stroke-width="8"/>
+<path d="M480 513v177" stroke="#43877f" stroke-width="6"/><circle cx="463" cy="606" r="6" fill="#27665f"/><circle cx="497" cy="606" r="6" fill="#27665f"/>
+<g opacity=".7" fill="#69a69c"><rect x="243" y="526" width="67" height="15" rx="3"/><rect x="243" y="551" width="67" height="12" rx="3"/><rect x="654" y="526" width="67" height="15" rx="3"/><rect x="654" y="551" width="67" height="12" rx="3"/></g>
+<path d="M181 403h598l-29 83H210Z" fill="#fff9e8"/>
+<path d="M205 442h550" stroke="#168f84" stroke-width="19"/>
+<path d="M210 466h540" stroke="#edbb83" stroke-width="8"/>
+<rect x="342" y="340" width="276" height="63" rx="10" fill="#fff9e8" stroke="#9dbdb2" stroke-width="4"/>
+<text x="480" y="382" fill="#276b64" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="bold" letter-spacing="3">24H SUPPLY</text>
+<g fill="#325f59" font-family="Arial,sans-serif"><text x="60" y="65" font-size="22" font-weight="bold" letter-spacing="4">ALICE INC.</text><text x="900" y="65" text-anchor="end" font-size="16" letter-spacing="3">ARCHIVE / 2200</text><text x="60" y="827" font-size="18" letter-spacing="3">NIGHT SUPPLY SHRINE</text><text x="900" y="827" text-anchor="end" font-size="18" letter-spacing="3">2026 / 021</text></g>
+</svg>
