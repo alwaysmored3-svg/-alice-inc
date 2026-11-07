@@ -1,13 +1,21 @@
 /* Connect generated museum artwork to the exhibit renderer and keep exhibit metadata coherent. */
 (function(){
   if(typeof window.renderExhibit!=='function') return;
+  // Use the same original vector illustrations in the main museum as in Featured Archives.
+  // The existing generated-art library takes precedence when it has an entry.
+  const archiveIllustrations={
+    '2026-001':'assets/exhibit-2026-001.svg',
+    '2026-021':'assets/exhibit-2026-021.svg',
+    '2026-025':'assets/exhibit-2026-025.svg',
+    '2026-031':'assets/exhibit-2026-031.svg'
+  };
   const baseRender=window.renderExhibit;
   window.renderExhibit=function(){
     baseRender();
     const visual=document.getElementById('artifactVisual');
     const exhibit=window.exhibits?.[window.current] || (typeof exhibits!=='undefined' ? exhibits[current] : null);
     if(!visual || !exhibit) return;
-    const src=window.ALICE_GENERATED_ART && window.ALICE_GENERATED_ART[exhibit.no];
+    const src=(window.ALICE_GENERATED_ART && window.ALICE_GENERATED_ART[exhibit.no]) || archiveIllustrations[exhibit.no];
     if(src){
       visual.classList.add('has-generated-art');
       visual.textContent='';
