@@ -22,3 +22,16 @@
 .spotlight-detail-copy .button{align-self:flex-start;margin-top:22px}
 @media(max-width:760px){.spotlight-feature a,.spotlight-detail{grid-template-columns:1fr}.spotlight-feature img{height:auto;min-height:0;aspect-ratio:1.65;object-fit:cover}.spotlight-feature-copy{padding:22px}.spotlight-layout{padding:42px 0 64px}.spotlight-detail img{height:auto;aspect-ratio:1.15}.spotlight-detail-copy{padding:24px}.spotlight-detail-copy .button{width:100%}}
 @media(prefers-reduced-motion:reduce){.spotlight-feature a{transition:none}.spotlight-feature a:hover{transform:none}}
+
+/* Illustrated entrance to the featured archives */
+.archive-hero{position:relative;overflow:hidden;isolation:isolate;border-radius:28px;margin:20px 0 40px;background:linear-gradient(135deg,#1a3155,#455c88 55%,#bb829c);color:#fff;box-shadow:0 24px 60px rgba(33,49,83,.2)}
+.archive-hero-art{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:32px 32px 0}
+.archive-hero-art img{display:block;width:100%;aspect-ratio:1.12;object-fit:cover;border:2px solid rgba(255,255,255,.45);border-radius:18px 18px 0 0;box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.archive-hero-copy{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;padding:24px 20px 30px;background:linear-gradient(0deg,rgba(12,25,53,.86),rgba(12,25,53,.25))}
+.archive-hero-copy>span:first-child{font-size:11px;letter-spacing:.22em;font-weight:800;color:#bdece7}
+.archive-hero-copy strong{font-size:clamp(20px,3.4vw,34px);line-height:1.4}
+.archive-hero-copy span[lang=en]{font-size:13px;color:#e0e7f4}
+.archive-hero-copy a{display:inline-block;margin-top:10px;padding:10px 19px;border:1px solid rgba(255,255,255,.75);border-radius:999px;font-weight:800;background:rgba(255,255,255,.12)}
+.archive-hero-copy a:hover{background:rgba(255,255,255,.24)}
+#featured-works{scroll-margin-top:90px}
+@media(max-width:760px){.archive-hero{border-radius:20px;margin:16px 0 28px}.archive-hero-art{padding:16px 16px 0;gap:6px}.archive-hero-art img{aspect-ratio:.8;border-radius:10px 10px 0 0}.archive-hero-copy{padding:20px 14px 24px}.archive-hero-copy strong{font-size:clamp(19px,5vw,27px)}}
